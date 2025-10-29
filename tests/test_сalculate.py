@@ -1,3 +1,5 @@
+import sys
+
 import pytest
 from src.сalculate import Calculate
 
@@ -25,3 +27,12 @@ def test_division_normal(a, b, expected):
 def test_division_errors(a, b, expected_exception):
     with pytest.raises(expected_exception):
         Calculate().division(a, b)
+
+@pytest.mark.skipif(sys.platform=="darwin", reason="тест не поддерживается")
+def test_calculate():
+    assert Calculate().add(1, 2) == 3
+
+@pytest.mark.skip(reason="не поддерживаемое окружение")
+def test_calculate2():
+    assert Calculate().add(4, 5) == 9
+
